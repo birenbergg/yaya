@@ -1,0 +1,64 @@
+﻿@model List<Candidate>
+
+<div id="app" v-cloak>
+    <div class="container">
+        <h2>{{ heading }}</h2>
+
+        <section id="welcome-section" v-if="section == 'welcome'">
+            <input type="text" inputmode="tel" ref="tel" class="form-control mt-5" placeholder="Enter your phone number" @@keyup.enter="submitDetails">
+
+            <p v-if="errorMessage" class="error-message mb-0 mt-2">
+                {{ errorMessage }}
+            </p>
+
+            <button type="button" class="btn btn-primary my-4" @@click="submitDetails" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+        </section>
+
+        <section id="candidates-section" v-if="section == 'candidates'">
+            <div class="candidates">
+                @foreach (var c in Model)
+                {
+                    <label class="candidate">
+                        <input type="checkbox" class="form-control" @@change="toggleCandidate($event, @c.Id)">
+                        <span>
+                            <img src="~/Images/@(c.Slug).jpg" alt="@c.Name" />
+                            <strong>@c.Name</strong>
+                        </span>
+                    </label>
+                }
+            </div>
+
+            <p v-if="errorMessage" class="error-message mb-0 mt-2">
+                {{ errorMessage }}
+            </p>
+
+            <button type="button" class="send-btn btn btn-primary btn-lg" @@click="sendVotes">Send</button>
+        </section>
+
+        <section id="thank-you-section" v-if="section == 'thank-you'">
+            <button type="button" class="btn btn-link my-4" @@click="home">Go back to start</button>
+        </section>
+
+        <div class="modal" id="modal" v-if="modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Verification code</h5>
+                        <button type="button" class="btn-close" aria-label="Close" @@click="closeModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" inputmode="numeric" ref="verification-code" class="form-control" placeholder="Enter verification code" @@keyup.enter="submitVerificationCode">
+
+                        <p v-if="verificationCodeErrorMessage" class="error-message mb-0 mt-2">
+                            {{ verificationCodeErrorMessage }}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @@click="closeModal">Close</button>
+                        <button type="button" class="btn btn-primary" @@click="submitVerificationCode">Verify</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

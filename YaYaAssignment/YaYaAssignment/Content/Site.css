@@ -1,0 +1,101 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.container {
+    margin: 2em auto;
+    text-align: center
+}
+
+.candidates {
+    display: flex;
+    flex-direction: column;
+}
+
+.candidate {
+    background: #eee;
+    border-radius: 16px;
+    margin: 8px 0;
+    text-align: left
+}
+
+    .candidate:hover {
+        background: #cef;
+    }
+
+    .candidate.selected {
+        background: #09e;
+        color: #fff;
+    }
+
+    .candidate img {
+        border-radius: 50%;
+        width: 80px;
+        margin: 12px;
+        border: 1px solid #ccc;
+    }
+
+    .candidate strong {
+        font-size: 20px;
+    }
+
+    .candidate input {
+        display: none;
+    }
+
+.send-btn {
+    margin-top: 2em;
+    width: 400px;
+}
+
+.error-message {
+    color: #dc3545;
+}
+
+#welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#welcome-section label {
+    display: block;
+    margin-top: 64px;
+}
+
+#modal {
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(5px);
+    display: block;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+[v-cloak] {
+    display: none !important
+}
